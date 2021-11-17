@@ -9,7 +9,7 @@ import UIKit
 
 // MARK: - HomeViewController
 
-class HomeViewController: UIViewController {
+final class HomeViewController: UIViewController {
     // MARK: Lifecycle
 
     init() {
@@ -18,8 +18,8 @@ class HomeViewController: UIViewController {
         navigationItem.title = "Delivery App"
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Settings",
                                                             style: .plain,
-                                                            target: nil,
-                                                            action: nil)
+                                                            target: self,
+                                                            action: #selector(obterDadosDidTap))
     }
 
     required init?(coder: NSCoder) {
@@ -30,9 +30,26 @@ class HomeViewController: UIViewController {
         navigationController?.navigationBar.prefersLargeTitles = true
     }
 
-    // MARK: Internal
-
     override func loadView() {
-        self.view = HomeView()
+        self.view = homeView
+    }
+
+    // MARK: Private
+
+    private let homeView: HomeView = {
+
+        let view = HomeView()
+        return view
+    }()
+}
+
+extension HomeViewController {
+    @objc
+    private func obterDadosDidTap() {
+        let dataSource = RestaurantsViewModel()
+        dataSource.bindViewModelUpdated = { [weak self] in
+            guard let self = self else { return }
+            self.homeView.restaurantListView.configure(dataSource: dataSource)
+        }
     }
 }

@@ -7,7 +7,15 @@
 
 import Foundation
 
+protocol RestaurantsViewModelDelegate: AnyObject {
+    func startedDownload()
+    func successedDownload()
+    func failedDownload()
+}
+
 class RestaurantsViewModel {
+
+    weak var delegate: RestaurantsViewModelDelegate?
 
     private let repository: DeliveryApi
 
@@ -40,12 +48,17 @@ class RestaurantsViewModel {
     // MARK: Private
 
     private func fetchData() {
-        repository.fetchRestaurants { result in
+        delegate?.startedDownload()
+        repository.fetchRestaurants { [weak self] result in
+            guard let self = self else { return }
+            
             switch result {
                 case let .success(restaurants):
                     self.restaurants = restaurants
+                    self.delegate?.successedDownload()
                 case let .failure(error):
                     print(error)
+                    self.delegate?.failedDownload()
             }
         }
     }

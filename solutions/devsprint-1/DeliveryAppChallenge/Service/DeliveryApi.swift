@@ -68,9 +68,13 @@ extension DeliveryApi: DeliveryApiProtocol {
                 return completion(.failure(.decodificationError))
             }
 
-            DispatchQueue.main.async {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 6) {
+                restaurants.forEach{print($0.name)}
                 completion(.success(restaurants))
+
             }
+//            DispatchQueue.main.async {
+//            }
         }
         task.resume()
     }

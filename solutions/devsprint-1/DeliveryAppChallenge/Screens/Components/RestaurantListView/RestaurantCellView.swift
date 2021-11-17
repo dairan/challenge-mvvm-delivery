@@ -41,8 +41,7 @@ class RestaurantCellView: UITableViewCell {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont.boldSystemFont(ofSize: 17)
-        label.text = "Benjamin a Padaria"
-        label.accessibilityIdentifier = "restaurant-Name-Label"
+//        label.text = "Benjamin a Padaria"
         return label
     }()
 
@@ -51,8 +50,7 @@ class RestaurantCellView: UITableViewCell {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textColor = .gray
         label.font = UIFont.systemFont(ofSize: 14)
-        label.text = "Padaria • 23-33 min"
-        label.accessibilityIdentifier = "restaurant-Info-Label"
+//        label.text = "Padaria • 23-33 min"
         return label
     }()
 
@@ -72,13 +70,17 @@ class RestaurantCellView: UITableViewCell {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+
+    func configure(restaurant: RestaurantCell) {
+        restaurantNameLabel.text = restaurant.title
+        restaurantInfoLabel.text = restaurant.description
+    }
 }
 
 extension RestaurantCellView {
 
     func addSubviews() {
         contentView.addSubview(mainStackView)
-
         mainStackView.addArrangedSubview(logoImageView)
         mainStackView.addArrangedSubview(labelsStackView)
 

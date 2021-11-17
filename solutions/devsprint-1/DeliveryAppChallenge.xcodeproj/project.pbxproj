@@ -34,6 +34,7 @@
 		B17EC8D9273A64760015ED07 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 983271BC272752AF0010C63A /* AppDelegate.swift */; };
 		B17EC8DA273A65530015ED07 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98612706272F56AB0049403C /* SettingsView.swift */; };
 		B1CF855B273B4EDA004F0797 /* RestaurantsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1CF855A273B4EDA004F0797 /* RestaurantsViewModel.swift */; };
+		B1DD68002741CA1900C42762 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1DD67FF2741CA1900C42762 /* HomeViewModel.swift */; };
 		B1F02B72273B275A00AC70CF /* DeliveryApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98EA0565272A0A0F007B0228 /* DeliveryApi.swift */; };
 		B1F02B73273B276800AC70CF /* MenuItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98F1297C272F51DE00B88A87 /* MenuItemViewController.swift */; };
 		B1F02B74273B277200AC70CF /* AddressSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98EA055A272A092F007B0228 /* AddressSearchViewController.swift */; };
@@ -84,6 +85,7 @@
 		B176DB9E273A635A0066F51D /* AddressView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddressView.swift; sourceTree = "<group>"; };
 		B176DBA1273A63C50066F51D /* SceneDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		B1CF855A273B4EDA004F0797 /* RestaurantsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantsViewModel.swift; sourceTree = "<group>"; };
+		B1DD67FF2741CA1900C42762 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		B1F02B78273B29D300AC70CF /* DeliveryAppChallengeTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeliveryAppChallengeTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -190,6 +192,7 @@
 			isa = PBXGroup;
 			children = (
 				98F1296D272F363200B88A87 /* HomeView.swift */,
+				B1DD67FF2741CA1900C42762 /* HomeViewModel.swift */,
 				983271C0272752AF0010C63A /* HomeViewController.swift */,
 			);
 			path = Home;
@@ -453,6 +456,7 @@
 				B17EC8D9273A64760015ED07 /* AppDelegate.swift in Sources */,
 				98F12977272F48F000B88A87 /* AddressListView.swift in Sources */,
 				98EA055E272A0949007B0228 /* RestaurantListViewController.swift in Sources */,
+				B1DD68002741CA1900C42762 /* HomeViewModel.swift in Sources */,
 				98F1297B272F51AE00B88A87 /* SettingsViewController.swift in Sources */,
 				B1CF855B273B4EDA004F0797 /* RestaurantsViewModel.swift in Sources */,
 				98F1296C272F328200B88A87 /* CategoryListView.swift in Sources */,
