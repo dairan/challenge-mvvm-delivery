@@ -7,14 +7,29 @@
 
 import UIKit
 
+// MARK: - RestaurantListViewDelegate
+
+protocol RestaurantListViewDelegate: AnyObject {
+    func numberOfRows() -> Int
+    func didSelectRowAt(_ indexPath: IndexPath)
+}
+
+// MARK: - RestaurantListView
+
 class RestaurantListView: UIView {
     // MARK: Lifecycle
+
+   weak var delegate: RestaurantListViewDelegate?
 
     init() {
         super.init(frame: .zero)
         backgroundColor = .white
         addSubviews()
         configureConstraints()
+    }
+
+    func configureDelegate(delegate: RestaurantListViewDelegate) {
+        self.delegate = delegate
     }
 
     required init?(coder: NSCoder) {
@@ -46,7 +61,6 @@ extension RestaurantListView {
 
     func configureConstraints() {
         NSLayoutConstraint.activate([
-
             tableView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
             tableView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor),
             tableView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor),
@@ -55,12 +69,11 @@ extension RestaurantListView {
     }
 }
 
-// MARK: - UITableViewDataSource
+// MARK: UITableViewDataSource
 
 extension RestaurantListView: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        dataSource.numberOfRows
-        10
+        delegate?.numberOfRows() ?? 3
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -69,13 +82,13 @@ extension RestaurantListView: UITableViewDataSource {
             return UITableViewCell()
         }
 
-//        let restaurant = dataSource.itemForCell(at: indexPath)
+//        let restaurant = delegate.itemForCell(at: indexPath)
 //        cell.configure(restaurant: restaurant)
         return cell
     }
 }
 
-// MARK: - UITableViewDelegate
+// MARK: UITableViewDelegate
 
 extension RestaurantListView: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -83,5 +96,6 @@ extension RestaurantListView: UITableViewDelegate {
     }
 
     public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        delegate?.didSelectRowAt(indexPath)
     }
 }

@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class HomeView: UIView {
+class HomeView: UIView {
     // MARK: Lifecycle
 
     init() {
@@ -53,9 +53,10 @@ final class HomeView: UIView {
         return categoryListView
     }()
 
-    let restaurantListView: RestaurantListView = {
+   lazy var restaurantListView: RestaurantListView = {
         let restaurantListView = RestaurantListView()
         restaurantListView.translatesAutoresizingMaskIntoConstraints = false
+        restaurantListView.configureDelegate(delegate: self)
         return restaurantListView
     }()
 }
@@ -94,4 +95,15 @@ extension HomeView {
             restaurantListView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
         ])
     }
+}
+
+extension HomeView: RestaurantListViewDelegate {
+    func didSelectRowAt(_ indexPath: IndexPath) {
+        
+    }
+
+    func numberOfRows() -> Int {
+        10
+    }
+
 }

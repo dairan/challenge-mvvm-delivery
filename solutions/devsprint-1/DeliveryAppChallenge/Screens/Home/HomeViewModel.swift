@@ -6,11 +6,35 @@
 //
 
 import Foundation
+import UIKit
+
+
+// MARK: - HomeViewModel
 
 final class HomeViewModel {
-    let restauratsList: [Restaurant]
+    // MARK: Lifecycle
 
-    init(restaurants: [Restaurant]) {
-        self.restauratsList = restaurants
+    init(repository: DeliveryApi = DeliveryApi()) {
+        self.repository = repository
+    }
+
+    // MARK: Internal
+
+    let repository: DeliveryApi
+    var bindUpdated: (() -> Void)?
+
+    private(set) var restaurants: [Restaurant] = [] {
+        didSet { bindUpdated?() }
+    }
+
+    func fetchRestaurats() {
+        repository.fetchRequest(urlString: .homeRestaurantList, method: .get) { (result: Result<[Restaurant], DeliveryApiError>) in
+            switch result {
+                case let .success(success):
+                    self.restaurants = success
+                case let .failure(failure):
+                    print("==4===:  failure", failure)
+            }
+        }
     }
 }
