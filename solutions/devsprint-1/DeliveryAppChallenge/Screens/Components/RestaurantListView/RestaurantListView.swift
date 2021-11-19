@@ -15,10 +15,6 @@ class RestaurantListView: UIView {
         backgroundColor = .white
         addSubviews()
         configureConstraints()
-        dataSource.bindViewModelUpdated = {
-            self.tableView.reloadData()
-//            self.configureConstraints()
-        }
     }
 
     required init?(coder: NSCoder) {
@@ -35,70 +31,21 @@ class RestaurantListView: UIView {
         tableView.register(RestaurantCellView.self, forCellReuseIdentifier: self.cellIdentifier)
         tableView.dataSource = self
         tableView.delegate = self
-        tableView.backgroundView = activityIndicator
-        tableView.refreshControl = refresherControl
         return tableView
     }()
 
-    func configure(dataSource: RestaurantsViewModel) {
-        self.dataSource = dataSource
-//        dataSource.delegate = self
-    }
-
-    @objc
-    func update() {
-        let dataSource = RestaurantsViewModel()
-        self.dataSource = dataSource
-        dataSource.delegate = self
-    }
-
     // MARK: Private
 
-    private lazy var activityIndicator: UIActivityIndicatorView = {
-        let ai = UIActivityIndicatorView()
-        ai.translatesAutoresizingMaskIntoConstraints = false
-        ai.hidesWhenStopped = true
-        ai.startAnimating()
-        return ai
-    }()
-
-    lazy var refresherControl: UIRefreshControl = {
-        let refresher = UIRefreshControl()
-//        refresher.target(forAction: #selector(update), withSender: self)
-        refresher.addTarget(self, action: #selector(update), for: .valueChanged)
-        refresher.attributedTitle = NSAttributedString("Puxe para atualizar")
-        return refresher
-    }()
-
     private let cellIdentifier = "RestaurantCellIdentifier"
-    private lazy var dataSource: RestaurantsViewModel = {
-        let dataSource = RestaurantsViewModel()
-        dataSource.delegate = self
-        return dataSource
-    }()
-
-    private func startActivityAnimation() {
-//        activityIndicator.isHidden = false
-        activityIndicator.startAnimating()
-    }
-
-    private func stopActivityAnimation() {
-//        activityIndicator.isHidden = true
-        activityIndicator.stopAnimating()
-    }
 }
 
 extension RestaurantListView {
     func addSubviews() {
-//        addSubview(activityIndicator)
         addSubview(tableView)
-//        refresherControl = refresherControl
     }
 
     func configureConstraints() {
         NSLayoutConstraint.activate([
-            activityIndicator.centerXAnchor.constraint(equalTo: tableView.centerXAnchor),
-            activityIndicator.topAnchor.constraint(equalTo: tableView.topAnchor, constant: 200),
 
             tableView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
             tableView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor),
@@ -112,7 +59,8 @@ extension RestaurantListView {
 
 extension RestaurantListView: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        dataSource.numberOfRows
+//        dataSource.numberOfRows
+        10
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -121,9 +69,8 @@ extension RestaurantListView: UITableViewDataSource {
             return UITableViewCell()
         }
 
-        let restaurant = dataSource.itemForCell(at: indexPath)
-        cell.configure(restaurant: restaurant)
-
+//        let restaurant = dataSource.itemForCell(at: indexPath)
+//        cell.configure(restaurant: restaurant)
         return cell
     }
 }
@@ -136,20 +83,5 @@ extension RestaurantListView: UITableViewDelegate {
     }
 
     public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    }
-}
-
-// MARK: - RestaurantsViewModelDelegate
-
-extension RestaurantListView: RestaurantsViewModelDelegate {
-    func startedDownload() {
-        startActivityAnimation()
-    }
-
-    func successedDownload() {
-        stopActivityAnimation()
-    }
-
-    func failedDownload() {
     }
 }

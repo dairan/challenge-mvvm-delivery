@@ -48,17 +48,21 @@ class RestaurantsViewModel {
     // MARK: Private
 
     private func fetchData() {
-        delegate?.startedDownload()
-        repository.fetchRestaurants { [weak self] result in
-            guard let self = self else { return }
-            
+        repository.fetchRequest(urlString: .homeRestaurantList) { (result: Result<[Restaurant], DeliveryApiError>) in
             switch result {
-                case let .success(restaurants):
-                    self.restaurants = restaurants
-                    self.delegate?.successedDownload()
-                case let .failure(error):
-                    print(error)
-                    self.delegate?.failedDownload()
+                case .success(let success):
+                    print(success)
+                case .failure(let failure):
+                    print(failure)
+            }
+        }
+
+        repository.fetchRequest(urlString: .restaurantDetails) { (result: Result<RestaurantDetail, DeliveryApiError>) in
+            switch result {
+                case .success(let success):
+                    print(success)
+                case .failure(let failure):
+                    print(failure)
             }
         }
     }

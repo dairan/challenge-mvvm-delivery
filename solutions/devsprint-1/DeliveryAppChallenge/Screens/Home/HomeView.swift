@@ -71,7 +71,7 @@ extension HomeView {
     }
 
     private func configureConstraints() {
-        let estimatedHeight = CGFloat(restaurantListView.tableView.numberOfRows(inSection: 0)) * RestaurantListView.cellSize
+//        let estimatedHeight = CGFloat(restaurantListView.tableView.numberOfRows(inSection: 0)) * RestaurantListView.cellSize
 
         NSLayoutConstraint.activate([
             scrollView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor),

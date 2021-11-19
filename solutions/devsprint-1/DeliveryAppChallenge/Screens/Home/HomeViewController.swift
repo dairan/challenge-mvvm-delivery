@@ -9,9 +9,7 @@ import UIKit
 
 // MARK: - HomeViewController
 
-final class HomeViewController: UIViewController {
-    // MARK: Lifecycle
-
+class HomeViewController: UIViewController {
     init() {
         super.init(nibName: nil, bundle: nil)
 
@@ -28,6 +26,7 @@ final class HomeViewController: UIViewController {
 
     override func viewDidLoad() {
         navigationController?.navigationBar.prefersLargeTitles = true
+//        RestaurantsViewModel()
     }
 
     override func loadView() {
@@ -49,7 +48,7 @@ extension HomeViewController {
         let dataSource = RestaurantsViewModel()
         dataSource.bindViewModelUpdated = { [weak self] in
             guard let self = self else { return }
-            self.homeView.restaurantListView.configure(dataSource: dataSource)
+//            self.homeView.restaurantListView.configure(dataSource: dataSource)
         }
     }
 }
